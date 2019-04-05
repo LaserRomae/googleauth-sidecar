@@ -1,0 +1,14 @@
+language: python
+
+branches:
+  only:
+    - development
+
+addons:
+  sonarcloud:
+    organization: "KEY"
+    token:
+      secure: "SECURE_TOKEN"
+
+script:
+  - sonar-scanner
