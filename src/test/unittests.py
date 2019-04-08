@@ -52,9 +52,9 @@ class UnitTests(unittest.TestCase):
         from app import app, OAuthSignIn, GoogleSignIn
         app.config['SERVER_NAME'] = 'localhost:8000'
         with app.app_context():
-            oauthsignin = OAuthSignIn('google')
+            oauthsignin = OAuthSignIn.get_provider('google')
             googlesignin = GoogleSignIn()
-            self.assertEqual(oauthsignin.get_provider('google').__class__, googlesignin.__class__)
+            self.assertEqual(oauthsignin.__class__, googlesignin.__class__)
 
     def test_googlesignin_authorize(self):
         from app import app, OAuthSignIn

@@ -144,15 +144,15 @@ class GoogleSignIn(OAuthSignIn):
         super(GoogleSignIn, self).__init__('google')
         # Gets the Google open-id configuration and loads it in a dictionary
         googleinfo = requests.get('https://accounts.google.com/.well-known/openid-configuration')
-        google_params = json.load(googleinfo.get_json())
+        google_params = googleinfo.json()
         # Instanciates the OAuth2Service using the previously loaded Google parameters
         self.service = OAuth2Service(
                 name='google',
                 client_id=self.consumer_id,
                 client_secret=self.consumer_secret,
-                authorize_url=google_params.get('authorization_endpoint'),
-                base_url=google_params.get('userinfo_endpoint'),
-                access_token_url=google_params.get('token_endpoint')
+                authorize_url=google_params['authorization_endpoint'],
+                base_url=google_params['userinfo_endpoint'],
+                access_token_url=google_params['token_endpoint']
         )
 
     def authorize(self):
@@ -179,17 +179,6 @@ class GoogleSignIn(OAuthSignIn):
         )
         me = oauth_session.get('').json()
         return "", me
-
-# OAuthSignIn implementation for Facebook OAuth2
-class FacebookSignIn(OAuthSignIn):
-    # TODO working on it.
-    pass
-
-# OAuthSignIn implementation for Twitter OAuth2
-class TwitterSignIn(OAuthSignIn):
-    # TODO working on it.
-    pass
-
 
 # HTTP reverse proxy
 # catches all the requests for the other container and checks if the user is authenticated

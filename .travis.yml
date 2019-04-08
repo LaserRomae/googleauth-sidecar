@@ -11,5 +11,5 @@ addons:
     organization: "laserromae"
 
 script:
-  - nosetests --verbosity=3 --with-coverage --cover-package=src/app --cover-branches --cover-xml -v
+  - nosetests --with-coverage --cover-branches --cover-xml src/test/unittest.py
   - sonar-scanner
