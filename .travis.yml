@@ -6,9 +6,9 @@ branches:
 
 addons:
   sonarcloud:
-    organization: "KEY"
+    organization: "laserromae"
     token:
-      secure: "SECURE_TOKEN"
+      secure: "iIRz/QY0fI3EAoNX37EoHgNj8cb+v04uLBdEQGaAxkb0UOc/eesLTMWk5hzKcL8Nb16EBfon56P1lO9fdAPwSz9u3LYQI74F2FMilJ5B0UTEbDxMuzscuKRnoVbxuBCra0PPg5mqspn+b5uP2TiXgRwaarPqdZ95zK94Fmk1SL3Oir95GRgAtfkvnBvfouZmsFH5r9zs1DxJVNs8/NzRkXXFxfFczQ7LONLVErprjQaSsE6bi0laBb+AYk6eknqnCEkWFV0UfLmjzTbHP+ig23kiD42ALUsQcdMmfSdbUvWfsIRFdEP1218XlNQPonuYIqOBNs3EjgklOojAQKZrCrQb82BUVJh1tXe8t5QYteF55h0HmDkBznX8uwbMSWjtmltl8TacpTnMw8grxsvmUCaQ39G2exf+sTsLm9arwGpkVOtOYHaOL/QLrKOSRJToRN2HS6U7CncJQpc8R08+RoyWQ67IeNGFVHFwyTufMlzbYM+1KGfqTk3eUyvo/+Lycu5gpna5AHFyB8xLqSh1d7oD3w6Oy/eDHGx6sVbzFbVL5ZqB/IpNGvOvQ0u6EeQ6wW76C505QPAQwf3CRuA9p6sl1BsLO54Os9IrVU5Jijaa+nlpyD2b4VFrzSiPPc4940BUYpl9iyQQK5c6JaOe6zh32Uor36FE2GGRRn/3kWk="
 
 script:
   - sonar-scanner
