@@ -9,5 +9,5 @@ addons:
     organization: "laserromae"
 
 script:
-  - nosetests --with-coverage --cover-package=src/app --cover-branches --cover-xml
+  - nosetests --with-coverage --cover-package=src/app --cover-branches --cover-xml -v
   - sonar-scanner
