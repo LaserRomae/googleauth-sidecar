@@ -1,4 +1,6 @@
 language: python
+python:
+  - "3.6"
 
 branches:
   only:
@@ -9,5 +11,5 @@ addons:
     organization: "laserromae"
 
 script:
-  - nosetests --with-coverage --cover-package=src/app --cover-branches --cover-xml -v
+  - nosetests --verbosity=3 --with-coverage --cover-package=src/app --cover-branches --cover-xml -v
   - sonar-scanner
