@@ -180,55 +180,96 @@ class GoogleSignIn(OAuthSignIn):
         me = oauth_session.get('').json()
         return "", me
 
+# OAuthSignIn implementation for Facebook OAuth2
+class FacebookSignIn(OAuthSignIn):
+    # TODO working on it.
+    pass
 
+# OAuthSignIn implementation for Twitter OAuth2
+class TwitterSignIn(OAuthSignIn):
+    # TODO working on it.
+    pass
+
+
+# HTTP reverse proxy
+# catches all the requests for the other container and checks if the user is authenticated
 @app.route('/', defaults={'path': ''}, methods=['GET', 'POST', 'PUT', 'DELETE'])
 @app.route('/<path:path>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def catch_all(path):
+    # If the user is not logged in, redirects to the oauth2authorize route
     if 'user' not in session:
         return redirect(url_for('oauth2authorize',
                         _external=True, _scheme='https'))
 
+    # Builds the route to the container
     url = INTERNAL_BACKEND + '{0}'.format(path)
-    r = None
+
+    # Initializes the empty request and parameters
+    req = None
     params = None
+
+    # Gets the json body if it exists
     body = request.get_json() if request.get_json() is not None else {}
+
+    # Initializes the headers passing the user email in the X-Remote-User header
     headers = {}
     headers.update({"X-Remote-User": session['user']['email']})
     
+    # If query string is present -> update params
     if request.args:
         params = request.args
+
+    # If headers are present -> update headers
     if request.headers:
         headers.update(request.headers)
-        
+    
+    # If the path is different from the base path "/"   
     if path:
+        # If the request is for an oauth2 route, just redirect to it
         if path == 'oauth2authorize' or path == 'oauth2callback':
             return redirect(url_for(path, _external=True, _scheme='https'))
+        # Else just call the INTERNAL_BACKEND route using the request HTTP method    
         else:
             if request.method == 'GET':
-                r = requests.get(url, headers=headers, params=params)
+                req = requests.get(url, headers=headers, params=params)
             elif request.method == 'POST':
-                r = requests.post(url, headers=headers, data=body, params=params)
+                req = requests.post(url, headers=headers, data=body, params=params)
             elif request.method == 'PUT':
-                r = requests.put(url, headers=headers, data=body, params=params)
+                req = requests.put(url, headers=headers, data=body, params=params)
             elif request.method == 'DELETE':
-                r = requests.delete(url, headers=headers, data=body, params=params)
+                req = requests.delete(url, headers=headers, data=body, params=params)
     else:
-        r = requests.get(url, headers=headers, params=params)
+        req = requests.get(url, headers=headers, params=params)
 
-    return Response(r.content, status=r.status_code, content_type=r.headers['content-type'])
+    # Return a Response built with the previous request result
+    return Response(req.content, status=req.status_code, content_type=req.headers['content-type'])
 
 
+# The OAuth2 authorize route - now working only with google
 @app.route('/oauth2authorize')
 def oauth2authorize():
+    # Get the GoogleSignIn class
     oauth = OAuthSignIn.get_provider('google')
+
+    # Call the authorize() method
     return oauth.authorize()
 
 
+# The OAuth2 callback route - now working only with google
 @app.route('/oauth2callback')
 def oauth2callback():
+    # Get the GoogleSignIn class
     oauth = OAuthSignIn.get_provider('google')
+
+    # Call the callback() method
     _, me = oauth.callback()
+
+    # If the result is null, abort with 404 NOT FOUND
     if me is None:
         return abort(404)
+
+    # Set the session['user'] to the callback() method result
     session['user'] = me
+
+    # Redirect to the catch_all route
     return redirect(url_for('catch_all'))

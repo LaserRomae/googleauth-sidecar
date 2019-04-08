@@ -4,7 +4,7 @@ OAuth-Sidecar
 .. figure:: nstatic/logo.png
    :align: center
 
-Welcome to LaserRomae's OAuth-Sidecar documentation..
+Welcome to LaserRomae's OAuth-Sidecar documentation.
 
 Guide
 ^^^^^

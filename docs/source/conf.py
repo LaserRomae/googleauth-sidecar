@@ -24,7 +24,7 @@ copyright = u'2019, Supporto Sviluppo'
 author = u'Supporto Sviluppo'
 
 # The short X.Y version
-version = u''
+version = u'1.0'
 # The full version, including alpha/beta/rc tags
 release = u'1.0.0'
 
