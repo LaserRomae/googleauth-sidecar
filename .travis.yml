@@ -1,0 +1,15 @@
+language: python
+python:
+  - "3.6"
+
+branches:
+  only:
+    - development
+
+addons:
+  sonarcloud:
+    organization: "laserromae"
+
+script:
+  - nosetests --with-coverage --cover-branches --cover-xml src/test/unittests.py
+  - sonar-scanner
