@@ -11,5 +11,5 @@ addons:
     organization: "laserromae"
 
 script:
-  - nosetests --with-coverage --cover-branches --cover-xml src/test/unittest.py
+  - nosetests --with-coverage --cover-branches --cover-xml src/test/unittests.py
   - sonar-scanner
