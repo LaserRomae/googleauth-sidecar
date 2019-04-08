@@ -8,7 +8,7 @@ import os
 import sys
 import json
 import requests
-import urllib.request
+#import urllib.request
 
 # Internal imports
 from flask import Flask, abort, current_app, session, request, redirect, url_for, Response
@@ -143,8 +143,8 @@ class GoogleSignIn(OAuthSignIn):
     def __init__(self):
         super(GoogleSignIn, self).__init__('google')
         # Gets the Google open-id configuration and loads it in a dictionary
-        googleinfo = urllib.request.urlopen('https://accounts.google.com/.well-known/openid-configuration')
-        google_params = json.load(googleinfo)
+        googleinfo = requests.get('https://accounts.google.com/.well-known/openid-configuration')
+        google_params = json.load(googleinfo.get_json())
         # Instanciates the OAuth2Service using the previously loaded Google parameters
         self.service = OAuth2Service(
                 name='google',
