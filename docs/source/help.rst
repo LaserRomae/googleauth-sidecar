@@ -8,6 +8,12 @@ If the container isn't working as you expect, enable DEBUG logging in the ``Logg
 
 	``self.logger.setLevel(logging.DEBUG)``
 
+Then, feel free to add where you want the following line
+
+	``Logger.logger.debug("YOUR_MESSAGE")``
+
+In order to enable your custom debugging.
+
 Tests
 =====
 
