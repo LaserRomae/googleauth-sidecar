@@ -10,7 +10,7 @@ OAuth-Sidecar is built with the latest Python 3 version, supporting only Python3
 Dependencies 
 ============
 
-These distributions (described in the ``requirements.txt`` file) will be installed automatically when building the Dockerfile. 
+The dependencies (described in the ``requirements.txt`` file) will be installed automatically when building the Dockerfile. 
 
 * `Flask <http://flask.pocoo.org/docs/1.0/>`_ (version 1.0.2) - a `micro` framework written in Python
 * `Flask-Cors <https://flask-cors.readthedocs.io/en/latest/>`_  (version 3.0.7) - a Flask extension that handles Cross Origin Resource Sharing (CORS)
