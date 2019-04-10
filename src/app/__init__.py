@@ -15,7 +15,7 @@ import sys
 
 
 # Internal imports
-from utils import Logger
+from .utils import Logger
 
 
 # Creates a new Flask app and sets the SECRET_KEY
