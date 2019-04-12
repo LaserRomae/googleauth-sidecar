@@ -3,17 +3,20 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-# External imports
-import os
-import sys
-import json
-import requests
-#import urllib.request
 
-# Internal imports
+# External imports
 from flask import Flask, abort, current_app, session, request, redirect, url_for, Response
 from flask_cors import CORS
+import json
+import os
 from rauth import OAuth2Service
+import requests
+import sys
+
+
+# Internal imports
+from .utils import Logger
+
 
 # Creates a new Flask app and sets the SECRET_KEY
 app = Flask(__name__)
@@ -26,8 +29,9 @@ CORS(app)
 try:
     GOOGLE_LOGIN_CLIENT_ID = os.environ['CLIENT_ID']
     GOOGLE_LOGIN_CLIENT_SECRET = os.environ['CLIENT_SECRET']
+    Logger.logger.info("Initialized Google OAuth2 credentials.")
 except KeyError as e:
-    print("KeyError occurred: Missing %s key." % (e, ))
+    Logger.logger.error("KeyError occurred: Missing %s key." % (e, ))
     sys.exit(-1)
 
 OAUTH_CREDENTIALS = {
@@ -37,10 +41,11 @@ OAUTH_CREDENTIALS = {
     }
 }
 
+# Paranoia
 try:
     app.config['OAUTH_CREDENTIALS'] = OAUTH_CREDENTIALS
 except KeyError as e:
-    print("KeyError occurred: Missing %s key.")
+    Logger.logger.error("KeyError occurred: Missing %s key.")
     sys.exit(-1)
 
 # Internal backend where every request is redirected to

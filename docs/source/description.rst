@@ -5,3 +5,5 @@ Description
 
 This container acts as a reverse **HTTP proxy** for another container and it authenticates the user through the configured OAuth 2 service (currently only Google OAuth is available).
 
+If the user is not authenticated the container redirects to the OAuth2 login page.
+

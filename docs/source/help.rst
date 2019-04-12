@@ -4,9 +4,15 @@ Help
 Troubleshooting
 ===============
 
-If the container isn't working as you expect, enable DEBUG logging to help understand what is going on under the hood and why.
+If the container isn't working as you expect, enable DEBUG logging in the ``Logger`` class under ``src/app/utils.py`` to help understand what is going on under the hood and why.
 
-	``logging.getLogger('gunicorn').level = logging.DEBUG``
+	``self.logger.setLevel(logging.DEBUG)``
+
+Then, feel free to add where you want the following line
+
+	``Logger.logger.debug("YOUR_MESSAGE")``
+
+In order to enable your custom debugging.
 
 Tests
 =====
