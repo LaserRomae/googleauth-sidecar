@@ -11,6 +11,8 @@ RUN yum -y install python36 python36-pip
 COPY requirements.txt /requirements.txt
 COPY src /usr/local/googleauth-sidecar
 
+RUN mkdir -p /usr/local/googleauth-sidecar/logs
+
 RUN pip3.6 install -r /requirements.txt
 
 WORKDIR /usr/local/googleauth-sidecar

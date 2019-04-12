@@ -11,5 +11,7 @@ addons:
     organization: "laserromae"
 
 script:
+  - mkdir -p /usr/local/googleauth-sidecar/logs/
+  - chmod 777 /usr/local/googleauth-sidecar/logs/
   - nosetests --with-coverage --cover-branches --cover-xml src/test/unittests.py
   - sonar-scanner
