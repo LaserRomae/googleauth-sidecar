@@ -26,8 +26,8 @@ class Logger():
 		# Level set to WARN 
 		self.logger.setLevel(logging.WARN)
 
-		# Create a file for logging purposes under /var/log/oauth-sidecar.log
-		self.handler = logging.FileHandler('/var/log/oauth-sidecar.log')
+		# Create a file for logging purposes under /usr/local/googleauth-sidecar/logs/oauth-sidecar.log
+		self.handler = logging.FileHandler('/usr/local/googleauth-sidecar/logs/oauth-sidecar.log')
 
 		# Define the formatter
 		self.formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
