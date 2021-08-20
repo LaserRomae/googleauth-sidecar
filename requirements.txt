@@ -1,6 +1,6 @@
 Flask==1.0.2
 Flask-Rauth
-Flask-Cors==3.0.7
+Flask-Cors>=3.0.9
 gunicorn==19.9.0
 requests
 nose
